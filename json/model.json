@@ -1,0 +1,56 @@
+{
+  "elements": [
+    {
+      "id": "b976a101-1cc9-47ff-818b-a60b4c83bdd2",
+      "name": "Apartment - 2 Room - Bounding Box",
+      "description": "",
+      "type": "unit",
+      "nature": "spatial",
+      "version": 276,
+      "geometry": {
+        "version": 1,
+        "primary": {
+          "type": "extrusion2d",
+          "unit": "METER",
+          "style": {
+            "type": "basic",
+            "value": {
+              "color": [1, 1, 1],
+              "opacity": 0.1
+            }
+          },
+          "value": {
+            "depth": 2.8,
+            "profile": {
+              "outerLoop": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 6.7,
+                  "y": 0
+                },
+                {
+                  "x": 6.7,
+                  "y": 8
+                },
+                {
+                  "x": 0,
+                  "y": 8
+                },
+                {
+                  "x": 0,
+                  "y": 0
+                }
+              ],
+              "innerLoops": []
+            }
+          }
+        }
+      }
+    }
+  ],
+  "relationships": [],
+  "errors": []
+}

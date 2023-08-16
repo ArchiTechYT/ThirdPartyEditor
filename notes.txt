@@ -1,0 +1,39 @@
+reference page : https://threejs.org/docs/#manual/en/introduction/Installation
+
+ http://localhost:5173/
+
+ 
+ css format 
+
+ <p>
+ p {
+    ...... 
+ }
+
+ id = "para1" 
+ #para1 {
+    ......
+ }
+
+class = "center" 
+.center{
+    ...... 
+}
+
+
+p element within center class
+p.center {
+    .......
+}
+
+
+
+// example 
+http://furnishup.github.io/blueprint3d/example/
+
+
+
+/// TODO LIST
+
+(1) to implement "isDecomposedBy" relationship 
+(2) 

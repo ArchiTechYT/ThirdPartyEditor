@@ -1,0 +1,43 @@
+{
+  "elements": [
+    {
+      "id": "18b1702a-4d70-4089-8a27-be46839ba00e",
+      "name": "a",
+      "description": "",
+      "type": "unit",
+      "nature": "spatial",
+      "version": 1,
+      "geometry": {
+        "version": 1,
+        "primary": {
+          "type": "extrusion2d",
+          "unit": "METER",
+          "style": {
+            "type": "basic",
+            "value": {
+              "color": [
+                0.5394794890033748, 0.783537791521566, 0.8879231178794775
+              ],
+              "opacity": 1
+            }
+          },
+          "value": {
+            "depth": "3",
+            "profile": {
+              "outerLoop": [
+                { "x": 1, "y": 2 },
+                { "x": 1, "y": 0 },
+                { "x": 0, "y": 0 },
+                { "x": 0, "y": 2 }
+              ],
+              "innerLoops": [],
+              "depth": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "relationships": [],
+  "errors": []
+}
