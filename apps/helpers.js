@@ -42,3 +42,16 @@ export function getVertices(mesh) {
   }
   return vertices;
 }
+
+export function SaveJsonToFile(jsonString) {
+  const blob = new Blob([jsonString], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "model.json";
+  document.body.appendChild(a);
+
+  a.click();
+
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}

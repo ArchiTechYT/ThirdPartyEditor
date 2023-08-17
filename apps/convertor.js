@@ -5,30 +5,6 @@ import { getVertices } from "./helpers";
 // reference : https://discourse.threejs.org/t/downloadjson-not-define/17224/11
 
 // SAVE JSON FILE EXTERNALLY
-export function downloadJSON(json, filename) {
-  saveString(JSON.stringify(json), filename); // temp ignoring this
-
-  // to update
-  var cubsFile = new cubsJson();
-  cubsFile.elements.push(new cubsSpace());
-  var str = JSON.stringify(cubsFile);
-
-  console.log(str);
-}
-
-function saveString(text, filename) {
-  save(new Blob([text], { type: "text/plain" }), filename);
-}
-
-var link = document.createElement("a");
-link.style.display = "none";
-document.body.appendChild(link);
-
-function save(blob, filename) {
-  link.href = URL.createObjectURL(blob);
-  link.download = filename;
-  link.click();
-}
 
 // SCENE CONVERTOR
 export function threeToCubsJson(scene) {
@@ -74,9 +50,7 @@ export function threeToCubsJson(scene) {
   // console testing
   var oJson = new cubsJson(spaces, rels); // cubsJson(scene, spaces); => scene isDecomposedBy spaces
   var str = JSON.stringify(oJson);
-  console.log(str);
-  return str;
-  // return str to save as json files
+  return str; // export "/"...???? format issue
 }
 
 /// CUBS OBJECT CLASS
@@ -212,7 +186,6 @@ class cubsGeometry {
     var tColor = mesh.material.color;
     var sty = new cubsStyle(tColor.r, tColor.g, tColor.b, 1.0);
     pri.style = sty;
-
     this.primary = pri;
   }
 }
@@ -222,7 +195,6 @@ class cubsPrimary {
   unit = "METER";
   style = new cubsStyle(); // to be updated
   value = new cubsValue();
-
   constructor() {}
 }
 
@@ -247,9 +219,6 @@ class cubsStyle {
   value = null;
 
   constructor(r, g, b, a) {
-    // var dR = r / 256;
-    // var dG = g / 256;
-    // var dB = b / 256;
     var sValue = new cubsStyleValue(r, g, b, a);
     this.value = sValue;
   }
@@ -266,11 +235,8 @@ class cubsStyleValue {
   }
 }
 
-/// THREE TO CUBS FUNCTIONS
-/// HOW TO ASSUME THE INPUTS' TYPE
-
 export function getProfile(mesh) {
-  // this will return the local geoemtry
+  // MIGHT NEED TO MAKE : CUBS.Z = -THREE.Z ???
   const position = mesh.geometry.getAttribute("position");
   const cubsPoints = [];
   let meshDepth = 0;
@@ -287,15 +253,3 @@ export function getProfile(mesh) {
   profile.depth = meshDepth;
   return profile;
 }
-
-/*
-/// TESTING & DEBUGGING TOOLS 
-export function showCubsSpace(mesh){
-
-  const space = new cubsSpace(mesh); 
-  var json = JSON.stringify(space); 
-  console.log(json);   
-} 
-*/
-
-//// additional attributes

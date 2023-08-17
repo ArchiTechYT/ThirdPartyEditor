@@ -1,7 +1,7 @@
 {
   "elements": [
     {
-      "id": "fc4c339f-e0df-43a8-991b-38da44fbf9d0",
+      "id": "30c5608c-1efc-4158-b9f2-ece9a3da1ee3",
       "name": "aa",
       "description": "",
       "type": "room",
@@ -22,13 +22,13 @@
             }
           },
           "value": {
-            "depth": "4",
+            "depth": "1",
             "profile": {
               "outerLoop": [
-                { "x": 2, "y": 3 },
-                { "x": 2, "y": 0 },
+                { "x": 1, "y": 1 },
+                { "x": 1, "y": 0 },
                 { "x": 0, "y": 0 },
-                { "x": 0, "y": 3 }
+                { "x": 0, "y": 1 }
               ],
               "innerLoops": [],
               "depth": 0
@@ -38,7 +38,7 @@
       }
     },
     {
-      "id": "a9c6da60-7206-467d-b600-0b2638ad95c7",
+      "id": "dc96ae8b-0813-45f3-ad9d-2bcfce1724db",
       "name": "cluster",
       "description": "",
       "type": "unit",
@@ -76,18 +76,18 @@
   ],
   "relationships": [
     {
-      "id": "53fdf6a0-cc30-4216-bfb9-13092798220b",
+      "id": "7ebcde35-66ea-42e5-968e-369b3a66e063",
       "type": "isDecomposedBy",
       "nature": "relationship",
-      "sourceId": "a9c6da60-7206-467d-b600-0b2638ad95c7",
-      "targetId": "fc4c339f-e0df-43a8-991b-38da44fbf9d0",
+      "sourceId": "dc96ae8b-0813-45f3-ad9d-2bcfce1724db",
+      "targetId": "30c5608c-1efc-4158-b9f2-ece9a3da1ee3",
       "version": 1,
       "dynamicFacets": {
         "placement": {
           "type": "plane3d",
           "unit": "METER",
           "value": {
-            "origin": { "x": -2, "y": 4.408604853147561, "z": 0 },
+            "origin": { "x": 0, "y": 0, "z": 0 },
             "xAxis": { "x": 1, "y": 0, "z": 0 },
             "yAxis": { "x": 0, "y": 1, "z": 0 },
             "zAxis": { "x": 0, "y": 0, "z": 1 }

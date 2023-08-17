@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { getColor, getVertices } from "./helpers";
-import { downloadJSON, getProfile } from "./convertor";
+import { getColor, getVertices, SaveJsonToFile } from "./helpers";
+import { getProfile } from "./convertor";
 import { threeToCubsJson } from "./convertor";
 import { generateUUID } from "three/src/math/MathUtils";
 //import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -14,6 +14,8 @@ scene.background = new THREE.Color(0xffffff);
 // + CAMERA
 const camera = new THREE.PerspectiveCamera(75, 1000 / 500, 0.1, 1000);
 camera.position.z = 5;
+camera.position.x = 5;
+camera.position.y = 5;
 
 // ADD A 2D-CEMERA OPTION
 
@@ -174,10 +176,7 @@ document.getElementById("btn_update").onclick = function (e) {
 document.getElementById("btn_upload").onclick = function (e) {
   e.preventDefault();
   var json = threeToCubsJson(scene);
-  downloadJSON(json, "model.json"); ///////////////////////////////////////////////////////
-  // TO PROPERLY SAVE JSON INTO FILES >>> DO IT LATER
-  // var json = geometry.toJSON();
-  // downloadJSON(json, "model.json");
+  SaveJsonToFile(json);
 };
 
 /// TESTING ZONE

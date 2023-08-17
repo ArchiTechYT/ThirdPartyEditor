@@ -35,5 +35,5 @@ http://furnishup.github.io/blueprint3d/example/
 
 /// TODO LIST
 
-(1) to implement "isDecomposedBy" relationship 
+(1) properly save the file.... 
 (2) 
