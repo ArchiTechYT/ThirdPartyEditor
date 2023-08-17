@@ -34,7 +34,7 @@ export function threeToCubsJson(scene) {
       console.log(wVec);
 
       var plane = new cubsPlane(
-        new cubsPoint3d(wVec.x, wVec.z, wVec.y),
+        new cubsPoint3d(wVec.x, -wVec.z, wVec.y),
         new cubsVector3d(1, 0, 0),
         new cubsVector3d(0, 1, 0),
         new cubsVector3d(0, 0, 1)
