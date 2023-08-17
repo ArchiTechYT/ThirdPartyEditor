@@ -32,24 +32,50 @@ function save(blob, filename) {
 
 // SCENE CONVERTOR
 export function threeToCubsJson(scene) {
+  // + CLUSTER MESH
+  const tmpGeo = new THREE.BoxGeometry(0, 0, 0);
+  const material = new THREE.MeshStandardMaterial();
+  material.color = new THREE.Color("rgb(256, 256, 256)"); // random color from the palatte
+  var cMesh = new THREE.Mesh(tmpGeo, material);
+  cMesh.userData.name = "cluster";
+
+  // + CLUSTER PLACEHOLDER
+  var cluster = new cubsSpace(cMesh);
+  cluster.type = "unit";
+
+  // + ELEMENTS
+  // + RELATIONSHIP
   var spaces = [];
   var rels = [];
 
-  // + ELEMENTS
   scene.traverse(function (object) {
     if (object instanceof THREE.Mesh && object.userData.name != "ground") {
-      spaces.push(new cubsSpace(object));
-      console.log("Space name:", object.userData.name);
+      var space = new cubsSpace(object);
+      spaces.push(space);
+
+      var wVec = new THREE.Vector3();
+      object.getWorldPosition(wVec);
+      console.log(wVec);
+
+      var plane = new cubsPlane(
+        new cubsPoint3d(wVec.x, wVec.z, wVec.y),
+        new cubsVector3d(1, 0, 0),
+        new cubsVector3d(0, 1, 0),
+        new cubsVector3d(0, 0, 1)
+      );
+      var placement = new cubsPlacement(plane);
+      var relationship = new cubsRelationship(cluster, space, placement);
+      rels.push(relationship);
     }
   });
 
-  // + RELATIONSHIPS
-  // var
+  spaces.push(cluster);
 
   // console testing
-  var oJson = new cubsJson(spaces); // cubsJson(scene, spaces); => scene isDecomposedBy spaces
+  var oJson = new cubsJson(spaces, rels); // cubsJson(scene, spaces); => scene isDecomposedBy spaces
   var str = JSON.stringify(oJson);
   console.log(str);
+  return str;
   // return str to save as json files
 }
 
@@ -59,8 +85,9 @@ class cubsJson {
   relationships = [];
   errors = [];
 
-  constructor(spaces) {
+  constructor(spaces, rels) {
     this.elements = spaces;
+    this.relationships = rels;
     // convert
   }
 }
@@ -74,13 +101,19 @@ class cubsRelationship {
   targetId = "";
   version = 1;
   dynamicFacets = new cubsDynamicFacets();
-
+  /*
   constructor(srcId, tarId, placement) {
     this.id = generateUUID();
     this.sourceId = srcId;
     this.targetId = tarid;
+    this.dynamicFacets = new cubsDynamicFacets(placement); 
+  }
+  */
+  constructor(srcElem, tarElem, placement) {
+    this.id = generateUUID();
+    this.sourceId = srcElem.id;
+    this.targetId = tarElem.id;
     this.dynamicFacets = new cubsDynamicFacets(placement);
-    // return this; // ????
   }
 }
 
@@ -119,7 +152,7 @@ class cubsSpace {
   id = "";
   name = "";
   description = "";
-  type = "unit";
+  type = "room";
   nature = "spatial";
   version = 1;
   geometry = null;

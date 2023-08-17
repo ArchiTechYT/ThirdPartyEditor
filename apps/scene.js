@@ -173,7 +173,8 @@ document.getElementById("btn_update").onclick = function (e) {
 
 document.getElementById("btn_upload").onclick = function (e) {
   e.preventDefault();
-  threeToCubsJson(scene);
+  var json = threeToCubsJson(scene);
+  downloadJSON(json, "model.json"); ///////////////////////////////////////////////////////
   // TO PROPERLY SAVE JSON INTO FILES >>> DO IT LATER
   // var json = geometry.toJSON();
   // downloadJSON(json, "model.json");
@@ -191,7 +192,7 @@ document.getElementById("btn_test").onclick = function (e) {
   console.log("box's world position = ", worldPosition);
 };
 
-// ANIMATE ///////////////////////////////////////////////////////
+// ANIMATE
 function animate() {
   dragObejct();
   renderer.render(scene, camera); // make camera switchable between 2d vs 3d

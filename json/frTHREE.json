@@ -1,10 +1,10 @@
 {
   "elements": [
     {
-      "id": "18b1702a-4d70-4089-8a27-be46839ba00e",
-      "name": "a",
+      "id": "fc4c339f-e0df-43a8-991b-38da44fbf9d0",
+      "name": "aa",
       "description": "",
-      "type": "unit",
+      "type": "room",
       "nature": "spatial",
       "version": 1,
       "geometry": {
@@ -22,13 +22,49 @@
             }
           },
           "value": {
-            "depth": "3",
+            "depth": "4",
             "profile": {
               "outerLoop": [
-                { "x": 1, "y": 2 },
-                { "x": 1, "y": 0 },
+                { "x": 2, "y": 3 },
+                { "x": 2, "y": 0 },
                 { "x": 0, "y": 0 },
-                { "x": 0, "y": 2 }
+                { "x": 0, "y": 3 }
+              ],
+              "innerLoops": [],
+              "depth": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "a9c6da60-7206-467d-b600-0b2638ad95c7",
+      "name": "cluster",
+      "description": "",
+      "type": "unit",
+      "nature": "spatial",
+      "version": 1,
+      "geometry": {
+        "version": 1,
+        "primary": {
+          "type": "extrusion2d",
+          "unit": "METER",
+          "style": {
+            "type": "basic",
+            "value": { "color": [1, 1, 1], "opacity": 1 }
+          },
+          "value": {
+            "depth": 0,
+            "profile": {
+              "outerLoop": [
+                { "x": 0, "y": 0 },
+                { "x": 0, "y": 0 },
+                { "x": 0, "y": 0 },
+                { "x": 0, "y": 0 },
+                { "x": 0, "y": 0 },
+                { "x": 0, "y": 0 },
+                { "x": 0, "y": 0 },
+                { "x": 0, "y": 0 }
               ],
               "innerLoops": [],
               "depth": 0
@@ -38,6 +74,27 @@
       }
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "id": "53fdf6a0-cc30-4216-bfb9-13092798220b",
+      "type": "isDecomposedBy",
+      "nature": "relationship",
+      "sourceId": "a9c6da60-7206-467d-b600-0b2638ad95c7",
+      "targetId": "fc4c339f-e0df-43a8-991b-38da44fbf9d0",
+      "version": 1,
+      "dynamicFacets": {
+        "placement": {
+          "type": "plane3d",
+          "unit": "METER",
+          "value": {
+            "origin": { "x": -2, "y": 4.408604853147561, "z": 0 },
+            "xAxis": { "x": 1, "y": 0, "z": 0 },
+            "yAxis": { "x": 0, "y": 1, "z": 0 },
+            "zAxis": { "x": 0, "y": 0, "z": 1 }
+          }
+        }
+      }
+    }
+  ],
   "errors": []
 }
