@@ -33,12 +33,20 @@ export function threeToCubsJson(scene) {
       object.getWorldPosition(wVec);
       console.log(wVec);
 
+      // Conversion
+      // Rhino.X = Three.X
+      // Rhino.Y = -Three.Z - Box.Z
+
+      var tmpBox = object.geometry;
+      var offset = tmpBox.parameters.depth; // ???
+
       var plane = new cubsPlane(
-        new cubsPoint3d(wVec.x, -wVec.z, wVec.y),
+        new cubsPoint3d(wVec.x, -wVec.z - offset, wVec.y),
         new cubsVector3d(1, 0, 0),
         new cubsVector3d(0, 1, 0),
         new cubsVector3d(0, 0, 1)
       );
+
       var placement = new cubsPlacement(plane);
       var relationship = new cubsRelationship(cluster, space, placement);
       rels.push(relationship);
@@ -75,14 +83,7 @@ class cubsRelationship {
   targetId = "";
   version = 1;
   dynamicFacets = new cubsDynamicFacets();
-  /*
-  constructor(srcId, tarId, placement) {
-    this.id = generateUUID();
-    this.sourceId = srcId;
-    this.targetId = tarid;
-    this.dynamicFacets = new cubsDynamicFacets(placement); 
-  }
-  */
+
   constructor(srcElem, tarElem, placement) {
     this.id = generateUUID();
     this.sourceId = srcElem.id;
