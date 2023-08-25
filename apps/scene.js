@@ -51,9 +51,9 @@ scene.add(dLight4);
 
 // + GEOMETRY
 let box = new THREE.Mesh();
-let line = new THREE.LineSegments();
 let ground = new THREE.Mesh();
 let geometry = new THREE.BoxGeometry();
+let selectedMaterial = new THREE.MeshBasicMaterial();
 
 function addGeometry(name, x, y, z) {
   geometry = new THREE.BoxGeometry(x, y, z);
@@ -61,9 +61,10 @@ function addGeometry(name, x, y, z) {
 
   const material = new THREE.MeshStandardMaterial();
   var cCode = getColor();
-  material.color = new THREE.Color(cCode); // random color from the palatte
+  material.color = new THREE.Color(cCode);
 
-  box = new THREE.Mesh(geometry, material);
+  box = new THREE.Mesh(geometry, material); // old
+  // box = new THREE.Mesh(geometry, selectedMaterial); /// check!
   scene.add(box);
   box.userData.draggable = true;
   box.userData.name = name;
@@ -179,6 +180,28 @@ document.getElementById("btn_upload").onclick = function (e) {
   SaveJsonToFile(json);
 };
 
+// CHANGE MATERIALS
+const styleDropdown = document.getElementById("style-names");
+
+// Dropdown change event handler
+styleDropdown.addEventListener("change", (e) => {
+  e.preventDefault();
+  //const selectedTexture = styleDropdown.value;
+
+  //var filepath = "/images/" + selectedMaterial + ".jpg";
+  //console.log("/images/modernism.jpg");
+
+  const selectedTextureObj = new THREE.TextureLoader().load(
+    "/images/modernism.jpg"
+  );
+  selectedMaterial = new THREE.MeshBasicMaterial({
+    map: selectedTextureObj,
+  });
+
+  // boxMesh.material = selectedMaterial;
+  // return a material to apply to box
+});
+
 /// TESTING ZONE
 document.getElementById("btn_test").onclick = function (e) {
   e.preventDefault();
@@ -198,6 +221,7 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
-// + LOOPING FUNCTION
+///////// LOOPING FUNCTION ON SCENE /////////
+
 addGround();
 animate();
