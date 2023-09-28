@@ -1,18 +1,36 @@
-// Canvas
-const canvas = document.querySelector("#model-viewer");
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
+import { MTLLoader } from "three/addons/loaders/MTLLoader.js";
+import { getColor } from "./helpers";
+
+const canvas = document.getElementById("canvas_adingo");
 
 // Scene
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff); // can this be a grunch style background?
 
 // Lighting
-const light = new THREE.PointLight();
-light.position.set(0, 7.5, 20);
-light.color.set(0x999999);
+const light = new THREE.AmbientLight(0xffffff, 1);
 scene.add(light);
 
-const amLight = new THREE.AmbientLight(0x404040); // soft white light
-scene.add(amLight);
+const dLight1 = new THREE.DirectionalLight(0xffffff, 1); // pos(0, 1, 0)
+
+const dLight2 = new THREE.DirectionalLight(0xffffff, 1); // pos(1, 1, 0)
+dLight2.position.x = 1;
+
+const dLight3 = new THREE.DirectionalLight(0xffffff, 1); // pos(1, 1, 1)
+dLight3.position.x = 1;
+dLight3.position.z = 1;
+
+const dLight4 = new THREE.DirectionalLight(0xffffff, 1); // pos(-1, 1, -1)
+dLight3.position.x = -1;
+dLight3.position.z = -1;
+
+scene.add(dLight1);
+scene.add(dLight2);
+scene.add(dLight3);
+scene.add(dLight4);
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, 2, 0.1, 100);
@@ -26,53 +44,68 @@ const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   alpha: true,
 });
-renderer.setSize(600, 300); // how to automatically link to canvas?
+renderer.setSize(1000, 500); // how to automatically link to canvas?
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 // Controls
-const controls = new THREE.OrbitControls(camera, canvas);
+// const controls = new THREE.OrbitControls(camera, canvas);
+const controls = new OrbitControls(camera, renderer.domElement);
+
 controls.enableDamping = true;
 controls.enablePan = true;
 controls.addEventListener("change", (event) => {
-  console.log(controls.object.position);
+  // console.log(controls.object.position);
 });
 
-// model-selector
-const uploadForm = document.getElementById("upload-form");
-console.log(uploadForm);
+const uploadForm = document.getElementById("btn_upload");
 
-uploadForm.addEventListener("submit", (e) => {
+console.log("upload function is called!");
+
+uploadForm.addEventListener("click", (e) => {
   e.preventDefault();
 
-  let objName = "model/";
-  var select = document.getElementById("template");
-  var option = select.options[select.selectedIndex];
-
-  var value = select.options[select.selectedIndex].value;
-  objName += value;
-
-  ObjUploader(objName);
+  addObject("model/adingo_base.obj", "model/adingo_base.mtl");
+  addObject("model/adingo_floor.obj", "model/adingo_floor.mtl");
+  addObject("model/adingo_kitchen.obj", "model/adingo_kitchen.mtl");
+  addObject("model/adingo_walls.obj", "model/adingo_walls.mtl");
 });
 
-// "model/oneBedroom.obj"
+// LOAD OBJ + MTL
+function addObject(objFileName, mtlFileName) {
+  const mtlLoader = new MTLLoader();
+  mtlLoader.load(mtlFileName, (materials) => {
+    materials.preload();
 
-// OBJ-Loader
-function ObjUploader(objName) {
-  const loader = new THREE.OBJLoader();
-
-  loader.load(
-    objName,
-    function (object) {
-      object.position.set(5, 0, 2.5); // maybe add axis helper?
+    const objLoader = new OBJLoader();
+    objLoader.setMaterials(materials);
+    objLoader.load(objFileName, (object) => {
       scene.add(object);
-    },
-    function (xhr) {
-      console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-    },
-    function (error) {
-      console.log("An error happened");
-    }
-  );
+      renderer.render(scene, camera);
+    });
+  });
+}
+
+// GRID HELPER
+const size = 50;
+let divisions = 50;
+let gridHelper = new THREE.GridHelper();
+
+function addGridHelper() {
+  gridHelper = new THREE.GridHelper(size, divisions, 0xaaaaaa, 0xffffff); // (size, division, central line colour, grid colour)
+  scene.add(gridHelper);
+}
+
+let ground = new THREE.Mesh();
+
+// GROUND
+function addGround() {
+  const geoGround = new THREE.BoxGeometry(50, 0.1, 50);
+  geoGround.translate(0, -0.1, 0);
+  const matGround = new THREE.MeshBasicMaterial({ color: 0xeeeeee });
+  ground = new THREE.Mesh(geoGround, matGround);
+  ground.userData.ground = true;
+  ground.userData.name = "ground";
+  scene.add(ground);
 }
 
 // Animate
@@ -82,4 +115,8 @@ function animate() {
   controls.update();
 }
 
+addGround();
 animate();
+addGridHelper();
+
+// TODO: HOW TO ASSIGN MATERIALS?

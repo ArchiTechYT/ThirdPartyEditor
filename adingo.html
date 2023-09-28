@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title> OBJ & MTL </title>
+    <!--script type="module" src="/main.js"></script-->
+    <script type="module" src="/apps/uploader.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body style="font-family: Arial">
+    <div class="row">
+      <div class="column" style="background: #ffffff">
+        
+        <h2> <img src="/images/logo.webp" width="40px" height="40px"> </img>Customise Your Interior Style</h2>
+        <p>Create, View & Modify</p>
+        <canvas
+          id="canvas_adingo"
+          width="1000px"
+          height="500px"
+          class="webgl"
+        ></canvas>
+      </div>
+      <div class="column" style="background: #dfdfdf">
+        <h2>Create Spaces</h2>
+
+        <!--div id="divForm" style="background: rgb(200, 200, 200)">
+          <p>Create spaces to form prototype</p>
+          <form id="myForm">
+            <label for="name">Name</label>
+            <input type="text" id="sName" name="name" /><br />
+            <label for="wid">Width</label>
+            <input type="text" id="sWidth" name="wid" /><br />
+            <label for="leng">Length</label>
+            <input type="text" id="sLength" name="leng" /><br />
+            <label for="height">Height</label>
+            <input type="text" id="sHeight" name="height" /><br />
+            <br />
+
+            <input type="submit" id="btn_create" value="Create" />
+            <input type="submit" id="btn_remove" value="Remove" />
+            <input type="submit" id="btn_upload" value="Download Json" />
+          </form>
+        </div-->
+        <!--div id="divGrid" style="background: rgb(200, 200, 200)">
+          <label for="snap">Snapping Unit</label>
+          <input type="text" id="sUnit" name="unit" />
+          <input type="submit" id="btn_update" value="Update" />
+        </div-->
+        <div id="divTest" style="background: rgb(200, 200, 200)">
+          <label for="import"> Just Test It</label>
+          <input type="submit" id="btn_upload" value="upload" />
+        </div>
+
+        <div id="divMenu" style="background: rgb(200, 200, 200)">
+          <label for="material">Materials : </label> 
+          <select name="style-names" id="style-names"> 
+            <option value="modernism">Modernism</option> 
+            <option value="minimalism">Minimalism</option> 
+            <option value="industrial">Industrial</option> 
+            
+          </select>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

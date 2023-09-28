@@ -37,3 +37,20 @@ http://furnishup.github.io/blueprint3d/example/
 
 (1) properly save the file.... 
 (2) 
+
+
+
+CREATE BRANCH AND COMMIT FIRST TIME
+
+>> git init
+>> git add README.md
+>> git commit -m "first commit"
+>> git branch -M main
+>> git remote add origin https://github.com/ArchiTechYT/ThirdPartyEditor.git
+>> git push -u origin main
+
+
+UPDATES
+>> git add .
+>> git commit -m "this is the commit notes" 
+>> git push origin main 
